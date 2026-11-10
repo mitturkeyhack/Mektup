@@ -11,11 +11,11 @@
   --serif:"Noto Serif","Droid Serif",Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Roboto,"Segoe UI",sans-serif;overflow:hidden;-webkit-user-select:none;user-select:none}
+html,body{height:100%;background:var(--bg) url(img/night.jpg) center/cover no-repeat fixed;color:var(--text);font-family:system-ui,-apple-system,Roboto,"Segoe UI",sans-serif;overflow:hidden;-webkit-user-select:none;user-select:none}
 input,textarea{-webkit-user-select:text;user-select:text;font-family:inherit}
 button{font-family:inherit;cursor:pointer;color:inherit}
 svg{display:block}
-#stars{position:fixed;inset:0;z-index:0;width:100%;height:100%}
+#stars{position:fixed;inset:0;z-index:0;width:100%;height:100%;opacity:.8}
 .glow-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(520px 380px at 90% -8%,rgba(139,124,255,.28),transparent 62%),
              radial-gradient(480px 380px at -12% 108%,rgba(242,196,109,.14),transparent 60%)}
@@ -77,7 +77,7 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 .hero-foot{display:flex;justify-content:space-between;margin-top:9px;font-size:12px;color:var(--muted)}
 .hero.ready{border-color:rgba(242,196,109,.55);box-shadow:0 0 40px rgba(242,196,109,.18)}
 .hero-empty{text-align:center;padding:26px 18px}
-.hero-empty .env-ill{margin:6px auto 14px}
+.hero-empty .env-img{display:block;width:62%;max-width:240px;margin:0 auto 10px;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5));animation:floaty 4s ease-in-out infinite}
 .stats{display:flex;gap:10px;margin-top:14px}
 .stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 12px}
 .stat b{font-size:22px;font-weight:800;display:block}
@@ -161,7 +161,7 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 .p-mint{--pbg:#E7F4EC;--ink:#23392D;--pl:rgba(60,120,90,.17);--pm:rgba(60,140,110,.4)}
 .p-sky{--pbg:#E7EEFB;--ink:#22304D;--pl:rgba(70,100,170,.16);--pm:rgba(90,110,220,.35)}
 .p-night{--pbg:#1F2650;--ink:#E9E7FF;--pl:rgba(255,255,255,.08);--pm:rgba(242,196,109,.45)}
-.paper{background:var(--pbg);color:var(--ink);border-radius:6px 6px 18px 6px;padding:22px 20px 18px 34px;position:relative;
+.paper{background:var(--pbg) url(img/paper.jpg);background-size:256px;background-blend-mode:multiply;color:var(--ink);border-radius:6px 6px 18px 6px;padding:22px 20px 18px 34px;position:relative;
   box-shadow:0 20px 40px rgba(0,0,0,.45),0 2px 0 rgba(0,0,0,.05);font-family:var(--serif)}
 .paper::before{content:"";position:absolute;left:22px;top:0;bottom:0;width:1.5px;background:var(--pm)}
 .paper-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;opacity:.8}
@@ -253,7 +253,7 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 .preview-env .paddr{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:var(--serif);font-style:italic;font-size:13px;color:#6B5532}
 
 /* ---------- Stage (animations) ---------- */
-#stage{position:fixed;inset:0;z-index:40;display:none;background:radial-gradient(ellipse at 50% 40%,#1B2152,#070A1C 75%);overflow:hidden}
+#stage{position:fixed;inset:0;z-index:40;display:none;background:radial-gradient(ellipse at 50% 40%,rgba(27,33,82,.55),rgba(7,10,28,.92) 75%),url(img/night.jpg) center/cover;overflow:hidden}
 #stage.show{display:block;animation:fadeIn .35s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 #fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
@@ -272,7 +272,8 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 .pp.p1{top:-110px;transform-origin:50% 100%}
 .pp.p3{top:110px;transform-origin:50% 0}
 .pf,.pb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
-.pf{background:var(--pbg)}
+.pf{background:var(--pbg) url(img/paper.jpg);background-size:200px;background-blend-mode:multiply}
+.p-night .pf,.paper.p-night{background-image:none}
 .pb{background:linear-gradient(180deg,var(--pbg),var(--pbg) 70%,rgba(0,0,0,.06)),var(--pbg);transform:rotateX(180deg);box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
 .p1>.pf,.p1>.pb{border-radius:4px 4px 0 0}.p3>.pf,.p3>.pb{border-radius:0 0 4px 4px}
 .pc{position:absolute;left:0;width:252px;height:330px;padding:18px 16px 14px 26px;font-family:var(--serif);color:var(--ink);
@@ -341,10 +342,16 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 #toast{position:fixed;left:50%;top:22px;transform:translate(-50%,-140%);z-index:80;background:#232A5C;border:1px solid rgba(242,196,109,.3);color:var(--text);
   padding:13px 18px;border-radius:18px;font-size:14px;font-weight:600;box-shadow:0 14px 30px rgba(0,0,0,.45);transition:transform .4s cubic-bezier(.2,.9,.3,1.2);max-width:88%;text-align:center}
 #toast.on{transform:translate(-50%,0)}
-#welcome{position:fixed;inset:0;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;
-  background:radial-gradient(ellipse at 50% 30%,#232A66,#0B1026 70%)}
+#welcome{position:fixed;inset:0;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:flex-end;padding:30px 30px 44px;text-align:center;background:#070A1C;overflow:hidden}
+#welcome .wbg{position:absolute;left:-4%;right:-4%;top:-22%;height:104%;background:url(img/desk.jpg) center/cover;animation:kenburns 18s ease-in-out infinite alternate;z-index:0;-webkit-mask-image:linear-gradient(#000 72%,transparent 96%);mask-image:linear-gradient(#000 72%,transparent 96%)}
+#welcome .wshade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,10,28,.35) 0%,rgba(7,10,28,0) 22%,rgba(7,10,28,0) 58%,rgba(7,10,28,.85) 70%,#070A1C 80%)}
+#welcome .wglow{position:absolute;left:60%;top:50%;width:220px;height:220px;margin:-110px;border-radius:50%;z-index:1;background:radial-gradient(circle,rgba(255,200,110,.35),transparent 65%);animation:pulse 3.2s ease-in-out infinite;pointer-events:none}
+#welcome .wcon{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;align-items:center}
+#welcome .rise{position:absolute;z-index:1;top:50%;width:4px;height:4px;border-radius:50%;background:#FFE3A3;box-shadow:0 0 8px 2px rgba(255,210,120,.8);opacity:0;animation:rise 6s linear infinite}
+@keyframes rise{0%{transform:translate(0,0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translate(var(--dx,20px),-42vh) scale(1.2);opacity:0}}
+@keyframes kenburns{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(-2%,-3%)}}
 #welcome.on{display:flex}
-#welcome h1{font-size:30px;margin-top:30px;font-family:var(--serif)}
+#welcome h1{font-size:32px;font-family:var(--serif);color:#FFF3D6;text-shadow:0 4px 20px rgba(0,0,0,.6)}
 #welcome p{color:var(--muted);line-height:1.6;margin-top:10px;font-size:15px}
 #welcome input{margin-top:28px;width:100%;max-width:340px;padding:17px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);font-size:17px;text-align:center;outline:none}
 #welcome input:focus{border-color:var(--gold)}
@@ -550,16 +557,14 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 <div id="toast"></div>
 
 <div id="welcome">
-  <div style="position:relative">
-    <div class="env-ill"></div>
-    <span class="sparkle" style="left:-26px;top:-14px">✦</span>
-    <span class="sparkle" style="right:-22px;top:6px;animation-delay:.7s;font-size:13px">✦</span>
-    <span class="sparkle" style="right:-6px;bottom:-26px;animation-delay:1.2s;font-size:11px">✦</span>
-  </div>
+  <div class="wbg"></div><div class="wshade"></div><div class="wglow"></div>
+  <div id="riseBox"></div>
+  <div class="wcon">
   <h1>Geleceğe Mektup</h1>
   <p>Bugünkü hislerini, hayallerini ve dualarını mühürle.<br>Zamanı gelince onu gelecekteki sen açsın.</p>
   <input id="wName" maxlength="24" placeholder="Adın ne?">
   <button class="btn primary" id="wGo">Başlayalım ✦</button>
+  </div>
 </div>
 
 <script>
@@ -675,7 +680,7 @@ function renderHome(pending,ready,opened){
       <div class="prog"><i id="hProg"></i></div>
       <div class="hero-foot"><span>✍️ ${fmtShort(n.createdAt)}</span><span>📬 ${fmtShort(n.openAt)}</span></div></div>`;
     h.dataset.next=n.id;tickHero()}
-  else{h.innerHTML=`<div class="hero hero-empty"><div class="env-ill sm"></div><div class="htitle" style="margin:0 auto">Henüz yolda mektubun yok</div>
+  else{h.innerHTML=`<div class="hero hero-empty"><img class="env-img" src="img/envelope.webp" alt=""><div class="htitle" style="margin:0 auto">Henüz yolda mektubun yok</div>
       <div class="sub" style="margin-top:6px">İlk mektubunu yaz, zamana emanet et.</div>
       <button class="btn primary" style="margin-top:16px" id="heroWrite">✍️ İlk mektubunu yaz</button></div>`;
     $('#heroWrite').onclick=()=>openCompose()}
@@ -1083,7 +1088,8 @@ window.openFromNotif=function(id){closeSheet();closeReader();closeCompose();
 function resyncAlarms(){letters.filter(l=>!l.opened&&l.openAt>Date.now()).forEach(schedule)}
 
 /* ================= Welcome ================= */
-function welcome(){if(cfg.name){return}$('#welcome').classList.add('on')}
+function welcome(){if(cfg.name){return}$('#welcome').classList.add('on');
+  let h='';for(let i=0;i<16;i++)h+=`<i class="rise" style="left:${44+Math.random()*28}%;--dx:${(Math.random()-.5)*120}px;animation-delay:${(Math.random()*6).toFixed(2)}s;animation-duration:${(4.5+Math.random()*3).toFixed(2)}s"></i>`;$('#riseBox').innerHTML=h}
 $('#wGo').onclick=()=>{const v=$('#wName').value.trim();if(!v){$('#wName').classList.add('shake');setTimeout(()=>$('#wName').classList.remove('shake'),500);toast('Adını yazar mısın? 🙂');return}
   cfg.name=v.slice(0,24);save();vib(20);$('#welcome').style.transition='opacity .5s';$('#welcome').style.opacity=0;setTimeout(()=>{$('#welcome').classList.remove('on');$('#welcome').style.opacity=''},500);render()};
 $('#wName').addEventListener('keydown',e=>{if(e.key==='Enter')$('#wGo').click()});
