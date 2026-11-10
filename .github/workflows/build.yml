@@ -3,6 +3,7 @@ name: APK Derle
 on:
   push:
     branches: [ main ]
+    paths-ignore: [ 'hf_assets.txt', 'media/**', '.github/workflows/fetch-assets.yml' ]
   workflow_dispatch:
 
 permissions:

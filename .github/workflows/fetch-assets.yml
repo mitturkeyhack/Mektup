@@ -1,0 +1,32 @@
+name: Higgsfield dosyalarını indir
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'hf_assets.txt' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: İndir
+        run: |
+          mkdir -p media/hf
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            [ -f "media/hf/$name" ] && continue
+            curl -fsSL -o "media/hf/$name" "$url"
+          done < hf_assets.txt
+          ls -la media/hf
+      - name: Depoya ekle
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add media/hf
+          git diff --cached --quiet || git commit -m "Higgsfield dosyaları eklendi"
+          git push
