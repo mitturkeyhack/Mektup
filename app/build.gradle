@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+def runNo = (System.getenv("GITHUB_RUN_NUMBER") ?: "1").toInteger()
+
+android {
+    namespace 'com.mitturkeyhack.mektup'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.mitturkeyhack.mektup"
+        minSdk 26
+        targetSdk 35
+        versionCode runNo
+        versionName "1.0." + runNo
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("release.jks")
+            storePassword "mektup2026"
+            keyAlias "mektup"
+            keyPassword "mektup2026"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        encoding 'UTF-8'
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
